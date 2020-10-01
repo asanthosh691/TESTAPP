@@ -1,0 +1,122 @@
+version: 2.1
+
+orbs:
+  windows: circleci/windows@2.2.0
+
+jobs:
+  publish:
+    working_directory: C:\Users\circleci\project\WebApp
+    executor:    
+      name: windows/default
+    description: check pipeline
+    steps:    
+      - checkout
+      - run:
+          name: Clone EnageWebService
+          working_directory: C:\Users\circleci\project
+          command: git clone -b << pipeline.git.branch >> https://github.com/asanthosh69/EnageWebService.git
+               
+      - run:
+          name: Build Project
+          working_directory: C:\Users\circleci\project\EnageWebService
+          command: MSBuild.exe -m EnageWebService.sln /t:Rebuild /p:DeployOnBuild=true /p:Configuration=Release  /p:SkipPostSharp=true
+      - run:
+          name: Copy build content of  Project EngageWebService
+          working_directory: C:\Users\circleci\project\EnageWebService\bin
+          command:  Copy-Item -Path .\Release\ -Destination C:\Users\circleci\project\EngageWebService-Build -Force -Recurse     
+
+      - run:
+          name: List Projects
+          working_directory: C:\Users\circleci\project
+          command: dir
+
+      - run:
+          name: Checkout sub modules
+          working_directory: C:\Users\circleci\project\WebApp
+          command: git submodule update --init --recursive
+      - run:
+          name: Build Project EngageWebService
+          working_directory: C:\Users\circleci\project\WebApp
+          command: MSBuild.exe TESTAPP.sln /t:Rebuild /p:DeployOnBuild=true /p:Configuration=Release  /p:SkipPostSharp=true                 
+
+      - run:
+          name: Copy build content of  Project WebApp
+          working_directory: C:\Users\circleci\project\WebApp\obj\Release
+          command: |
+            Copy-Item -Path .\Package\ -Destination C:\Users\circleci\project\WebApp-Build -Force -Recurse
+            #Copy-Item -Path C:\Users\circleci\project\WebApp\aws-windows-deployment-manifest.json -Destination C:\Users\circleci\project
+            #Copy-Item -Path C:\Users\circleci\project\WebApp\Services.ps1 -Destination C:\Users\circleci\project
+            Copy-Item -Path C:\Users\circleci\project\WebApp\.ebextensions -Destination C:\Users\circleci\project -Force -Recurse
+      - run:
+          name: list
+          working_directory:  C:\Users\circleci\project
+          command:  dir
+
+      - persist_to_workspace:
+          root: C:\Users\circleci\project
+          paths:
+            - EngageWebService-Build            
+            - WebApp-Build            
+            - .ebextensions
+      
+  deploy:
+    docker:
+    - image: circleci/python:3.6.4
+    description: Deploy
+    steps:     
+      - attach_workspace:
+          at: ~/repo/project
+      - run:
+          name: List Data
+          working_directory: ~/repo/project/WebApp-Build
+          command: |
+            ls
+      - run:
+          name: List Data
+          working_directory: ~/repo/project/WebApp-Build
+          command: |
+            unzip TESTAPP.zip -d WebApp
+            cp -R WebApp/Content/C_C/Users/circleci/project/WebApp/obj/Release/Package/PackageTmp ~/repo/project/WebApp
+            rm -rf ~/repo/project/WebApp-Build
+      - run:
+          name: List Data
+          working_directory: ~/repo/project
+          command: |
+            ls            
+      - run:
+          name: Installing deployment dependencies
+          working_directory: ~/repo/project
+          command: |
+           # sudo pip install --upgrade pip
+           sudo pip install awsebcli --upgrade
+      - run:
+          name: Create AWS credentials manually
+          command: |
+             mkdir ~/repo/project/.aws
+             touch ~/repo/project/.aws/config
+             chmod 600  ~/repo/project/.aws/config
+             echo "[profile saamaws]" > ~/repo/project/.aws/config
+             echo "aws_access_key_id=$AWS_ACCESS_KEY_ID" >> ~/repo/project/.aws/config
+             echo "aws_secret_access_key=$AWS_SECRET_ACCESS_KEY" >> ~/repo/project/.aws/config
+      - run:
+          name: Deploying Web
+          working_directory: ~/repo/project
+          command: |            
+            eb init --region ap-south-1 --platform iis-10.0 TESTAPP
+            #eb create  --keyname saamuspk WebAppCore-dev2
+            eb deploy TESTAPP-dev 
+workflows:
+  publish_and_build:
+    jobs:
+      - publish
+      - Hold:
+          type: approval
+          requires:
+            - publish
+      - deploy:          
+          requires:
+            - Hold
+          filters:
+            branches:
+              only:
+                - << pipeline.git.branch >> 
