@@ -103,8 +103,8 @@ jobs:
           working_directory: ~/repo/project
           command: |            
             eb init --region ap-south-1 --platform iis-10.0 TESTAPP
-            #eb create  --keyname saamuspk WebAppCore-dev2
-            eb deploy TESTAPP-dev 
+            eb create  --keyname saamuspk TESTAPP-test
+            #eb deploy TESTAPP-test
 workflows:
   publish_and_build:
     jobs:
