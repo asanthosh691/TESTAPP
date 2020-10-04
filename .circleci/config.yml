@@ -55,9 +55,9 @@ jobs:
       - persist_to_workspace:
           root: C:\Users\circleci\project
           paths:
-            - EngageWebService-Build            
-            - WebApp-Build
+            - EngageWebService-Build                        
             - .ebextensions
+            - WebApp-Build
   deploy:
     docker:
     - image: circleci/python:3.6.4
