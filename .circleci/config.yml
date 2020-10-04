@@ -57,8 +57,7 @@ jobs:
           paths:
             - EngageWebService-Build            
             - WebApp-Build            
-            - .ebextensions
-      
+            - .ebextensions      
   deploy:
     docker:
     - image: circleci/python:3.6.4
