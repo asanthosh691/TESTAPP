@@ -102,7 +102,7 @@ jobs:
           name: Deploying Web
           working_directory: ~/repo/project
           command: |            
-            eb init --region ap-south-1 --platform iis-10.0 TESTAPP
+            eb init --region us-east-1 --platform iis-10.0 TESTAPP
             eb create  --keyname saamuspk TESTAPP-dev
             #eb deploy TESTAPP-test
 workflows:
