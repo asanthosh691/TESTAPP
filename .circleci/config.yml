@@ -35,7 +35,7 @@ jobs:
           working_directory: C:\Users\circleci\project\WebApp
           command: git submodule update --init --recursive
       - run:
-          name: Build Project EngageWebService
+          name: Build Project WebProject
           working_directory: C:\Users\circleci\project\WebApp
           command: MSBuild.exe TESTAPP.sln /t:Rebuild /p:DeployOnBuild=true /p:Configuration=Release  /p:SkipPostSharp=true                 
 
@@ -46,7 +46,7 @@ jobs:
             Copy-Item -Path .\Package\ -Destination C:\Users\circleci\project\WebApp-Build -Force -Recurse
             #Copy-Item -Path C:\Users\circleci\project\WebApp\aws-windows-deployment-manifest.json -Destination C:\Users\circleci\project
             #Copy-Item -Path C:\Users\circleci\project\WebApp\Services.ps1 -Destination C:\Users\circleci\project
-            Copy-Item -Path C:\Users\circleci\project\WebApp\.ebextensions -Destination C:\Users\circleci\project -Force -Recurse
+            Copy-Item -Path C:\Users\circleci\project\WebApp\.ebextensions -Destination C:\Users\circleci\project\Web-Build -Force -Recurse
       - run:
           name: list
           working_directory:  C:\Users\circleci\project
