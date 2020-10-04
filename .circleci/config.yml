@@ -46,7 +46,7 @@ jobs:
             Copy-Item -Path .\Package\ -Destination C:\Users\circleci\project\WebApp-Build -Force -Recurse
             #Copy-Item -Path C:\Users\circleci\project\WebApp\aws-windows-deployment-manifest.json -Destination C:\Users\circleci\project
             #Copy-Item -Path C:\Users\circleci\project\WebApp\Services.ps1 -Destination C:\Users\circleci\project
-            Copy-Item -Path C:\Users\circleci\project\WebApp\.ebextensions -Destination C:\Users\circleci\project -Force -Recurse
+            #Copy-Item -Path C:\Users\circleci\project\WebApp\.ebextensions -Destination C:\Users\circleci\project -Force -Recurse
       - run:
           name: list
           working_directory:  C:\Users\circleci\project
@@ -56,8 +56,7 @@ jobs:
           root: C:\Users\circleci\project
           paths:
             - EngageWebService-Build            
-            - WebApp-Build
-            - .ebextensions                        
+            - WebApp-Build            
   deploy:
     docker:
     - image: circleci/python:3.6.4
@@ -94,16 +93,16 @@ jobs:
              mkdir ~/repo/project/.aws
              touch ~/repo/project/.aws/config
              chmod 600  ~/repo/project/.aws/config
-             echo "[profile saamaws]" > ~/repo/project/.aws/config
+             echo "[profile default]" > ~/repo/project/.aws/config
              echo "aws_access_key_id=$AWS_ACCESS_KEY_ID" >> ~/repo/project/.aws/config
              echo "aws_secret_access_key=$AWS_SECRET_ACCESS_KEY" >> ~/repo/project/.aws/config
       - run:
           name: Deploying Web
           working_directory: ~/repo/project
           command: |            
-            eb init --region us-east-1 --platform iis-10.0 --keyname saamuspk WebApp
-            #eb create  --keyname saamuspk WebApp-dev
-            eb deploy WebApp-dev
+            eb init --region us-east-1 --platform iis-10.0 --keyname saamuspk TESTAPP
+            eb create  --keyname saamuspk TESTAPP-dev
+            #eb deploy WebApp-dev
 workflows:
   publish_and_build:
     jobs:
