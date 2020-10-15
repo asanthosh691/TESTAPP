@@ -4,5 +4,5 @@ $WebSiteName='TEST'
 $WebAppName='Default Web Site'
 $AppFolder='C:\inetpub\wwwroot'
 
-New-WebAppPool -Name $appPoolName -Force
-Set-ItemProperty -Path IIS:\AppPools\$appPoolName -name processModel -value @{username="admin"; password="admin"; identitytype=3}
+New-WebAppPool -Name 'Teest' -Force
+Set-ItemProperty -Path 'IIS:\AppPools\Teest' -name processModel -value @{username="admin"; password="admin"; identitytype=3}
