@@ -3,7 +3,6 @@
 Remove-Item c:\Deployment -Force -Recurse -ErrorAction SilentlyContinue
 Expand-Archive -LiteralPath C:\cfn\ebdata\source_bundle.zip -DestinationPath c:\Deployment -ErrorAction SilentlyContinue
 
-Add-Type -assembly Microsoft.IIs.PowerShell.Framework.ConfigurationElement
 powershell.exe -Command {
   New-WebAppPool -Name 'TEST' -Force
   Set-ItemProperty -Path 'IIS:\AppPools\TEST' -name processModel -value @{username="admin"; password="admin"; identitytype=3}
