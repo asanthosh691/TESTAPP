@@ -3,14 +3,14 @@
 Remove-Item c:\Deployment -Force -Recurse -ErrorAction SilentlyContinue
 Expand-Archive -LiteralPath C:\cfn\ebdata\source_bundle.zip -DestinationPath c:\Deployment -ErrorAction SilentlyContinue
 
-$iisAppPoolName="TEMP"
-cd IIS:\AppPools\
+#$iisAppPoolName="TEMP"
+#cd IIS:\AppPools\
 
 #check if the app pool exists
-if (!(Test-Path $iisAppPoolName -pathType container))
+if (!(Test-Path 'IIS:\AppPools\TEMP' -pathType container))
 {
     #create the app pool
-    $appPool = New-Item $iisAppPoolName
+    $appPool = New-Item 'IIS:\AppPools\TEMP'
     $appPool.managedRuntimeVersion ="V4.0"
     $appPool | Set-Item
 }
