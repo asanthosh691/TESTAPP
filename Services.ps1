@@ -3,9 +3,16 @@
 Remove-Item c:\Deployment -Force -Recurse -ErrorAction SilentlyContinue
 Expand-Archive -LiteralPath C:\cfn\ebdata\source_bundle.zip -DestinationPath c:\Deployment -ErrorAction SilentlyContinue
 
-powershell.exe -Command {
-  New-WebAppPool -Name 'TEST' -Force
-  Set-ItemProperty -Path 'IIS:\AppPools\TEST' -name processModel -value @{username="admin"; password="admin"; identitytype=3}
+$iisAppPoolName="TEMP"
+cd IIS:\AppPools\
+
+#check if the app pool exists
+if (!(Test-Path $iisAppPoolName -pathType container))
+{
+    #create the app pool
+    $appPool = New-Item $iisAppPoolName
+    $appPool.managedRuntimeVersion ="V4.0"
+    $appPool | Set-Item
 }
         #  function installsevice($servicename,$svc_dir,$svc_folder)
         #  {
