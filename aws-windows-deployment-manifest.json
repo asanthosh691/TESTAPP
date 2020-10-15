@@ -3,12 +3,7 @@
   "iisConfig": {
     "appPools": [
       {
-        "name": "TEST",
-        "processModel": {          
-          "username": "Administrator",
-          "password": "3p@9ekuDPZ@)WG%E(!s@4C%Dvn=R7KNx",
-          "identitytype": "SpecificUser"
-       },
+        "name": "TEST",        
         "recycling": {
           "regularTimeInterval": 1740
         }        
