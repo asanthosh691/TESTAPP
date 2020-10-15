@@ -5,7 +5,9 @@
       {
         "name": "Installing Services",
         "scripts": {
-          "install": "Services.ps1"          
+          "install": {
+             "file": "Services.ps1"
+          }          
         }
       }
     ]
