@@ -5,6 +5,7 @@
       {
         "name": "TEST",
         "processModel":{
+           "identitytype": 3,
            "username": "admin",
            "passwordd": "admin"
         },
