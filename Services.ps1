@@ -1,8 +1,9 @@
-﻿Import-Module WebAdministration
-
-    #create the app pool
-    $appPool = New-Item 'TEST'
-    $appPool | Set-ItemProperty -Path 'IIS:\AppPools\Teest' -name processModel -value @{username="admin"; password="admin"; identitytype=3}
-
-
- 
+﻿$appPoolName = 'MyAppPool'
+$scriptBlock = {
+    Import-Module WebAdministration
+    New-Item –Path IIS:\AppPools\$using:appPoolName
+    Set-ItemProperty -Path
+    IIS:\AppPools\$using:appPoolName -Name
+    managedRuntimeVersion -Value 'v4.0'    
+}
+Invoke-Command  –ScriptBlock $scriptBlock
