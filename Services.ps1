@@ -3,15 +3,14 @@ $appPoolName = 'Teest'
 $WebSiteName='TEST'
 $WebAppName='Default Web Site'
 $AppFolder='C:\inetpub\wwwroot'
-cd IIS:\AppPools\
-if ((Test-Path $appPoolName -pathType container))
+if(Test-Path(IIS:\AppPools\$appPoolName))
 {        
   Write-Host 'Web is Created with new App pool'`n
 }else{
 New-WebAppPool -Name $appPoolName -Force
 Set-ItemProperty -Path IIS:\AppPools\$appPoolName -name processModel -value @{username="admin"; password="admin"; identitytype=3}
 }
-if (Test-Path("IIS:\Sites\$WebSiteName\$WebAppName")){
+if (Test-Path(IIS:\Sites\$WebSiteName\$WebAppName)){
 Write-Host "Web App $WebAppName already exists" -ForegroundColor Yellow
 return
 }
