@@ -5,9 +5,10 @@
       {
         "name": "TEST",
         "processModel": {
-          "username": "Administrator",
-          "password": "3p@9ekuDPZ@)WG%E(!s@4C%Dvn=R7KNx",
-          "identitytype": 3
+          "identiy": {
+            "username": "Administrator",
+            "password": "3p@9ekuDPZ@)WG%E(!s@4C%Dvn=R7KNx",
+          }                    
        },
         "recycling": {
           "regularTimeInterval": 1740
