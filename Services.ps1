@@ -1,9 +1,7 @@
 ﻿Try
 {
 Remove-Item c:\Deployment -Force -Recurse -ErrorAction SilentlyContinue
-Expand-Archive -LiteralPath C:\cfn\ebdata\source_bundle.zip -DestinationPath c:\Deployment -ErrorAction SilentlyContinue
-  New-WebAppPool -Name $appPoolName -Force
-  Set-ItemProperty -Path IIS:\AppPools\$appPoolName -name processModel -value @{username="admin"; password="admin"; identitytype=3}
+Expand-Archive -LiteralPath C:\cfn\ebdata\source_bundle.zip -DestinationPath c:\Deployment -ErrorAction SilentlyContinue    
         #  function installsevice($servicename,$svc_dir,$svc_folder)
         #  {
         #    $svc_exist=Get-Service -Name $servicename -ErrorAction SilentlyContinue
