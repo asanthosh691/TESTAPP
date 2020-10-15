@@ -6,7 +6,8 @@
         "name": "TEST",
         "processModel": {
           "username": "Administrator",
-          "password": "3p@9ekuDPZ@)WG%E(!s@4C%Dvn=R7KNx"
+          "password": "3p@9ekuDPZ@)WG%E(!s@4C%Dvn=R7KNx",
+          "identitytype": 3
        },
         "recycling": {
           "regularTimeInterval": 1740
