@@ -44,7 +44,8 @@ jobs:
           working_directory: C:\Users\circleci\project\WebApp\obj\Release
           command: |
             Copy-Item -Path .\Package\ -Destination C:\Users\circleci\project\WebApp-Build -Force -Recurse                        
-            Copy-Item -Path C:\Users\circleci\project\WebApp\.ebextensions -Destination C:\Users\circleci\project -Force -Recurse
+            Copy-Item -Path C:\Users\circleci\project\WebApp\aws-windows-deployment-manifest.json -Destination C:\Users\circleci\project -Force -Recurse
+            Copy-Item -Path C:\Users\circleci\project\WebApp\Services.ps1 -Destination C:\Users\circleci\project -Force -Recurse
       - run:
           name: list
           working_directory:  C:\Users\circleci\project
@@ -55,7 +56,8 @@ jobs:
           paths:
             - EngageWebService-Build                                    
             - WebApp-Build
-            - .ebextensions
+            - aws-windows-deployment-manifest.json
+            - Services.ps1
   deploy:
     docker:
     - image: circleci/python:3.6.4
