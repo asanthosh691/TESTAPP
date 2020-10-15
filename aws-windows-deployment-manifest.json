@@ -1,15 +1,16 @@
 {
-  "manifestversion": 1,
+  "manifestVersion": 1,
   "deployments": {
     "custom": [
       {
         "name": "Installing Services",
         "scripts": {
           "install": {
-             "file": "Services.ps1"
-          }          
+            "file": "Services.ps1"
+          }
         }
       }
+
     ]
   }
 }
