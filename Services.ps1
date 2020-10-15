@@ -3,7 +3,8 @@ $appPoolName = 'Teest'
 $WebSiteName='TEST'
 $WebAppName='Default Web Site'
 $AppFolder='C:\inetpub\wwwroot'
-if(Test-Path("IIS:\AppPools\" + $appPoolName))
+cd IIS:\AppPools\
+if ((Test-Path $appPoolName -pathType container))
 {        
   Write-Host 'Web is Created with new App pool'`n
 }else{
