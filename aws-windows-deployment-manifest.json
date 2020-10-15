@@ -1,21 +1,5 @@
 {
   "manifestVersion": 1,
-  "iisConfig": {
-    "appPools": [
-      {
-        "name": "TEST",
-        "processModel":{
-           "identitytype": 3,
-           "username": "admin",
-           "passwordd": "admin"
-        },
-        "recycling": {
-          "regularTimeInterval": 10
-        }
-      }
-    ]
-  },
-
   "deployments": {
     "custom": [
       {
