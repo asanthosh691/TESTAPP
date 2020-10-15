@@ -1,7 +1,7 @@
 ﻿Try
 {
-Remove-Item c:\Deployment -Force -Recurse -ErrorAction SilentlyContinue
-Expand-Archive -LiteralPath C:\cfn\ebdata\source_bundle.zip -DestinationPath c:\Deployment -ErrorAction SilentlyContinue
+#Remove-Item c:\Deployment -Force -Recurse -ErrorAction SilentlyContinue
+#Expand-Archive -LiteralPath C:\cfn\ebdata\source_bundle.zip -DestinationPath c:\Deployment -ErrorAction SilentlyContinue
 $appPoolName = 'Teest'
 $WebSiteName='TEST'
 $WebAppName='Default Web Site'
