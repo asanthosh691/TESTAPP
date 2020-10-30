@@ -102,8 +102,8 @@ jobs:
           working_directory: ~/repo/project
           command: |            
             eb init --region us-east-1 --platform iis-10.0 --keyname saamuspk SampleTest
-            eb create  --keyname saamuspk Sampletest-dev
-            #eb deploy Sampletest-dev
+            #eb create  --keyname saamuspk Sampletest-dev
+            eb deploy Sampletest-dev
 workflows:
   publish_and_build:
     jobs:
