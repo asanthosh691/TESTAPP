@@ -37,13 +37,13 @@ jobs:
       - run:
           name: Build Project WebProject
           working_directory: C:\Users\circleci\project\WebApp
-          command: msdeploy.exe -verb:sync -source:iisApp="C:\Users\circleci\project\WebApp\TESTAPP" -dest:iisApp="Default Web Site/TESTAPP"
+          command: MSBuild.exe TESTAPP.sln /t:Rebuild /p:DeployOnBuild=true /p:Configuration=Release  /p:SkipPostSharp=true                 
 
       - run:
           name: Copy build content of  Project WebApp
           working_directory: C:\Users\circleci\project\WebApp\obj\Release
           command: |
-            #Copy-Item -Path .\Package\ -Destination C:\Users\circleci\project\WebApp-Build -Force -Recurse                        
+            Copy-Item -Path .\Package\ -Destination C:\Users\circleci\project\WebApp-Build -Force -Recurse                        
             #Copy-Item -Path C:\Users\circleci\project\WebApp\aws-windows-deployment-manifest.json -Destination C:\Users\circleci\project -Force -Recurse
             Copy-Item -Path C:\Users\circleci\project\WebApp\Services.ps1 -Destination C:\Users\circleci\project -Force -Recurse
             Copy-Item -Path C:\Users\circleci\project\WebApp\.ebextensions -Destination C:\Users\circleci\project -Force -Recurse
@@ -74,9 +74,7 @@ jobs:
           name: List Data
           working_directory: ~/repo/project/WebApp-Build
           command: |
-            unzip TESTAPP.zip -d WebApp
-            cp -R WebApp/Content/C_C/Users/circleci/project/WebApp/obj/Release/Package/PackageTmp ~/repo/project/WebApp
-            rm -rf ~/repo/project/WebApp-Build
+            C:\Program Files (x86)\IIS\Microsoft Web Deploy V3>msdeploy.exe -verb:sync -source:iisApp="C:\Users\circleci\project\WebApp\TESTAPP" -dest:iisApp="Default Web Site/TESTAPP"
       - run:
           name: List Data
           working_directory: ~/repo/project
