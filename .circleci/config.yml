@@ -37,7 +37,7 @@ jobs:
       - run:
           name: Build Project WebProject
           working_directory: C:\Users\circleci\project\WebApp
-          command: "C:\Program Files (x86)\IIS\Microsoft Web Deploy V3\msdeploy.exe -verb:sync -source:iisApp=C:\Users\raj_h91\source\repos\asanthosh691\TESTAPP -dest:iisApp=Default Web Site/TESTAPP"
+          command: MSBuild.exe TESTAPP.sln /t:Rebuild /p:DeployOnBuild=true /p:Configuration=Release  /p:SkipPostSharp=true                 
 
       - run:
           name: Copy build content of  Project WebApp
