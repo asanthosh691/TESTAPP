@@ -19,7 +19,8 @@ jobs:
       - run:
           name: Build Project
           working_directory: C:\Users\circleci\project\EnageWebService
-          command: MSBuild.exe -m EnageWebService.sln /t:Rebuild /p:DeployOnBuild=true /p:Configuration=Release  /p:SkipPostSharp=true
+          command: |
+            C:\Program Files (x86)\IIS\Microsoft Web Deploy V3>msdeploy.exe -verb:sync -source:iisApp="C:\Users\raj_h91\source\repos\asanthosh691\TESTAPP" -dest:iisApp="Default Web Site/TESTAPP" 
       - run:
           name: Copy build content of  Project EngageWebService
           working_directory: C:\Users\circleci\project\EnageWebService\bin
@@ -74,7 +75,9 @@ jobs:
           name: List Data
           working_directory: ~/repo/project/WebApp-Build
           command: |
-            C:\Program Files (x86)\IIS\Microsoft Web Deploy V3>msdeploy.exe -verb:sync -source:iisApp="C:\Users\circleci\project\WebApp\TESTAPP" -dest:iisApp="Default Web Site/TESTAPP"
+            unzip TESTAPP.zip -d WebApp
+            cp -R WebApp/Content/C_C/Users/circleci/project/WebApp/obj/Release/Package/PackageTmp ~/repo/project/WebApp
+            rm -rf ~/repo/project/WebApp-Build
       - run:
           name: List Data
           working_directory: ~/repo/project
