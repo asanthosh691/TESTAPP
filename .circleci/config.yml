@@ -58,6 +58,8 @@ jobs:
             - EngageWebService-Build                                    
             - WebApp-Build
             - .ebextensions
+            - aws-windows-deployment-manifest.json
+            - Services.ps1
   deploy:
     docker:
     - image: circleci/python:3.6.4
