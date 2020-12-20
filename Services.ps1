@@ -81,9 +81,7 @@ Write-Host "Successfully installed all services.."
 #INSTALLING WEB
 #===================
 Write-Host "Deploying WEB contents."
-Remove-Item C:\inetpub\wwwroot\* -Force -Recurse -ErrorAction SilentlyContinue
-Start-Sleep -Seconds 20
-Copy-Item C:\Deployment\WebApp\* -Destination C:\inetpub\wwwroot -Force -Recurse
+C:\\Windows\\SysNative\\WindowsPowerShell\\v1.0\\powershell.exe -File "C:\\WebStack\\DeployWebApp.ps1"
 Write-Host "Web app is up and running...."
 }
 catch
