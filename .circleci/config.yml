@@ -101,9 +101,9 @@ jobs:
           name: Deploying Web
           working_directory: ~/repo/project
           command: |            
-            eb init --region us-east-1 --platform iis-10.0 --keyname saamuspk SampleTest
+            eb init --region us-east-1 --platform iis-10.0 --keyname saamuspk SampleWeb
             #eb create  --keyname saamuspk TESTAPP
-            eb deploy TESTAPP
+            eb deploy Sampleweb-env
 workflows:
   publish_and_build:
     jobs:
