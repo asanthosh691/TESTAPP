@@ -1,15 +1,5 @@
 {
   "manifestVersion": 1,
-  "iisConfig": {
-    "appPools": [
-      {
-        "name": "TEST",        
-        "recycling": {
-          "regularTimeInterval": 1740
-        }        
-      }
-    ]
-  },
   "deployments": {
     "custom": [
       {
