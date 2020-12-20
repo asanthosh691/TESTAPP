@@ -65,9 +65,6 @@ Expand-Archive -LiteralPath C:\cfn\ebdata\source_bundle.zip -DestinationPath c:\
  $svc_folder="EngageWebService-Build"
  installsevice $servicename $svc_dir $svc_folder
 
- Write-Host 'Sleep time Start...'`n
- Start-Sleep -Seconds 30
- Write-Host 'Sleep time End...'`n
 # ###SearchService###
 # $svc_dir="C:\Services\SearchService"
 # $servicename_exe="SearchService"
