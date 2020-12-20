@@ -65,6 +65,9 @@ Expand-Archive -LiteralPath C:\cfn\ebdata\source_bundle.zip -DestinationPath c:\
  $svc_folder="EngageWebService-Build"
  installsevice $servicename $svc_dir $svc_folder
 
+ Write-Host 'Sleep time Start...'`n
+ Start-Sleep -Seconds 30
+ Write-Host 'Sleep time End...'`n
 # ###SearchService###
 # $svc_dir="C:\Services\SearchService"
 # $servicename_exe="SearchService"
@@ -77,10 +80,10 @@ Write-Host "Successfully installed all services.."
 
 #INSTALLING WEB
 #===================
-#Write-Host "Deploying WEB contents."
-#Remove-Item C:\inetpub\wwwroot\* -Force -Recurse -ErrorAction SilentlyContinue
-#Start-Sleep 2
-#Copy-Item C:\Deployment\WebApp\* -Destination C:\inetpub\wwwroot -Force -Recurse
+Write-Host "Deploying WEB contents."
+Remove-Item C:\inetpub\wwwroot\* -Force -Recurse -ErrorAction SilentlyContinue
+Start-Sleep -Seconds 20
+Copy-Item C:\Deployment\WebApp\* -Destination C:\inetpub\wwwroot -Force -Recurse
 Write-Host "Web app is up and running...."
 }
 catch
