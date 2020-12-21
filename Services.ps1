@@ -61,7 +61,7 @@ Expand-Archive -LiteralPath C:\cfn\ebdata\source_bundle.zip -DestinationPath c:\
 # ###EngageWebService###
  $svc_dir="C:\Services\EngageWebService"
  $servicename_exe="EngageWebService"
- $servicename='TelStrat Engage Web Service'
+ $servicename='EWSService'
  $svc_folder="EngageWebService-Build"
  installsevice $servicename $svc_dir $svc_folder
 
